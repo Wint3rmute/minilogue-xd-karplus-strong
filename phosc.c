@@ -12,6 +12,9 @@ float array[ARRAY_SIZE] = {0};
 int array_index = 0;
 int max_array = 100;
 
+float feedback = 0.5;
+float one_minus_feedback = 0.5;
+
 void array_fill() {
   for (int i = 0; i < max_array; i++) {
     array[i] = (float)rand() / (float)(RAND_MAX / 2.0) - 1;
@@ -31,7 +34,8 @@ void OSC_CYCLE(const user_osc_param_t *const params, int32_t *yn,
       array_index = 0;
     }
 
-    array[array_index] = 0.5 * array[array_index] + 0.5 * signal;
+    array[array_index] =
+        feedback * array[array_index] + one_minus_feedback * signal;
 
     *yn = f32_to_q31(signal);
     yn++;
@@ -46,4 +50,14 @@ void OSC_NOTEON(const user_osc_param_t *const params) {
 
 void OSC_NOTEOFF(const user_osc_param_t *const params) {}
 
-void OSC_PARAM(uint16_t index, uint16_t value) {}
+void OSC_PARAM(uint16_t index, uint16_t value) {
+  switch (index) {
+  case k_user_osc_param_shape:
+    feedback = param_val_to_f32(value);
+    one_minus_feedback = 1.0 - feedback;
+    break;
+
+  default:
+    break;
+  }
+}
