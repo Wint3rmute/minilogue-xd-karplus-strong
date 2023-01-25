@@ -1,11 +1,9 @@
 # Minilouguitar 
 *(name subject to change as I've just made it up)*
 
-A custom oscillator for Korg Minilogue xd (the code should also work on other
-[LogueSDK](https://www.korg.com/us/products/synthesizers/minilogue_xd/sdk.php)-compatible
-synthesizers).
-Basic implementation of the
-[Karplus-Strong plucked string algorithm](https://ccrma.stanford.edu/~jos/pasp/Karplus_Strong_Algorithm.html).
+A custom oscillator for [Korg Minilogue xd](https://www.korg.com/us/products/synthesizers/minilogue_xd/) 
+(the code should also work on other [LogueSDK](https://www.korg.com/us/products/synthesizers/minilogue_xd/sdk.php)-compatible synthesizers).
+Basic implementation of the [Karplus-Strong plucked string algorithm](https://ccrma.stanford.edu/~jos/pasp/Karplus_Strong_Algorithm.html).
 
 
 # Usage
