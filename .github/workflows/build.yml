@@ -2,40 +2,34 @@ name: Build Minilogue XD Oscillator
 
 on:
   push:
-    branches: [ master, main ]
+    branches: [master, main]
   pull_request:
-    branches: [ master, main ]
+    branches: [master, main]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-      with:
-        submodules: recursive
-    
-    - name: Install ARM toolchain
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y gcc-arm-none-eabi
-    
-    - name: Setup Logue SDK tools
-      run: |
-        chmod +x ./logue-sdk/tools/gcc/get_gcc_linux.sh
-        chmod +x ./logue-sdk/tools/logue-cli/get_logue_cli_linux.sh
-        ./logue-sdk/tools/gcc/get_gcc_linux.sh
-        ./logue-sdk/tools/logue-cli/get_logue_cli_linux.sh
-    
-    - name: Build oscillator
-      run: make
-    
-    - name: Upload build artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: minilogue-xd-oscillator
-        path: |
-          *.mnlgxdunit
-          build/
-        retention-days: 30
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Setup Logue SDK tools
+        run: |
+          chmod +x ./logue-sdk/tools/gcc/get_gcc_linux.sh
+          chmod +x ./logue-sdk/tools/logue-cli/get_logue_cli_linux.sh
+          ./logue-sdk/tools/gcc/get_gcc_linux.sh
+          ./logue-sdk/tools/logue-cli/get_logue_cli_linux.sh
+
+      - name: Build oscillator
+        run: make
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: minilogue-xd-oscillator
+          path: |
+            *.mnlgxdunit
+          retention-days: 30
