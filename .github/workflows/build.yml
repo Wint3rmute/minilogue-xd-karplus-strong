@@ -3,7 +3,7 @@ name: Build Minilogue XD Oscillator
 on:
   push:
     branches: [master, main]
-    tags: ['v*']
+    tags: ["v*"]
   pull_request:
     branches: [master, main]
 
@@ -43,20 +43,10 @@ jobs:
       contents: write
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
         with:
-          submodules: recursive
-
-      - name: Setup Logue SDK tools
-        run: |
-          chmod +x ./logue-sdk/tools/gcc/get_gcc_linux.sh
-          chmod +x ./logue-sdk/tools/logue-cli/get_logue_cli_linux.sh
-          ./logue-sdk/tools/gcc/get_gcc_linux.sh
-          ./logue-sdk/tools/logue-cli/get_logue_cli_linux.sh
-
-      - name: Build oscillator
-        run: make
+          name: minilogue-xd-oscillator
 
       - name: Create release
         uses: softprops/action-gh-release@v1
