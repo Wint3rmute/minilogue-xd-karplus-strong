@@ -2,9 +2,9 @@
 # Project Customization
 # #############################################################################
 
-PROJECT = phosc
+PROJECT = miniloguitar
 
-UCSRC = ./phosc.c
+UCSRC = ./miniloguitar.c
 
 UCXXSRC =
 
